@@ -60,7 +60,6 @@ public class RegisterWindow extends JFrame {
         });
         panel.add(registerBtn);
 
-        // Back button
         JButton backBtn = new JButton("Înapoi");
         backBtn.setBounds(210, 270, 140, 40);
         backBtn.addActionListener(e -> {

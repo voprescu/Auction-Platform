@@ -6,7 +6,6 @@ import model.User;
 import model.Bid;
 
 import javax.swing.*;
-import java.awt.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -21,54 +20,66 @@ public class AuctionDetailsWindow extends JFrame {
 
         setTitle("Detalii Licitație: " + auction.getTitle());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(600, 500);
+        setSize(800, 700);
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        panel.setLayout(null);
 
-        // Titlu
-        JLabel titleLabel = new JLabel(auction.getTitle());
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        JLabel titleLabel = new JLabel("Titlu: " + auction.getTitle());
+        titleLabel.setBounds(20, 20, 660, 25);
         panel.add(titleLabel);
-        panel.add(Box.createVerticalStrut(10));
 
-        // Info
-        panel.add(new JLabel("Descriere: " + auction.getDescription()));
-        panel.add(new JLabel("Preț curent: " + auction.getCurrentPrice() + " lei"));
-        panel.add(new JLabel("Preț de start: " + auction.getStartingPrice() + " lei"));
+        JLabel descLabel = new JLabel("Descriere: " + auction.getDescription());
+        descLabel.setBounds(20, 50, 660, 25);
+        panel.add(descLabel);
+
+        JLabel currentPriceLabel = new JLabel("Preț curent: " + auction.getCurrentPrice() + " lei");
+        currentPriceLabel.setBounds(20, 80, 660, 25);
+        panel.add(currentPriceLabel);
+
+        JLabel startPriceLabel = new JLabel("Preț de start: " + auction.getStartingPrice() + " lei");
+        startPriceLabel.setBounds(20, 110, 660, 25);
+        panel.add(startPriceLabel);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        panel.add(new JLabel("Expirare: " + auction.getEndTime().format(formatter)));
-        panel.add(Box.createVerticalStrut(20));
+        JLabel endTimeLabel = new JLabel("Expirare: " + auction.getEndTime().format(formatter));
+        endTimeLabel.setBounds(20, 140, 660, 25);
+        panel.add(endTimeLabel);
 
-        // Istoric oferte
-        panel.add(new JLabel("Oferte:"));
+        JLabel bidsLabel = new JLabel("Oferte:");
+        bidsLabel.setBounds(20, 170, 660, 25);
+        panel.add(bidsLabel);
+
         DefaultListModel<String> bidsModel = new DefaultListModel<>();
         JList<String> bidsList = new JList<>(bidsModel);
+        JScrollPane bidsScroll = new JScrollPane(bidsList);
+        bidsScroll.setBounds(20, 195, 660, 200);
+        panel.add(bidsScroll);
 
         try {
             List<Bid> bids = auctionService.getAuctionBids(auction.getId());
-            for (Bid bid : bids) {
-                bidsModel.addElement("User " + bid.getUserId() + ": " + bid.getAmount() + " lei");
+            if (bids.isEmpty()) {
+                bidsModel.addElement("Nu sunt oferte încă");
+            } else {
+                for (Bid bid : bids) {
+                    bidsModel.addElement("User " + bid.getUserId() + ": " + bid.getAmount() + " lei");
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Eroare: " + e.getMessage());
         }
 
-        panel.add(new JScrollPane(bidsList));
-        panel.add(Box.createVerticalStrut(20));
+        JLabel ofertaLabel = new JLabel("Plaseaza oferta (lei):");
+        ofertaLabel.setBounds(20, 410, 200, 25);
+        panel.add(ofertaLabel);
 
-        // Plasare oferta
-        panel.add(new JLabel("Plaseaza oferta:"));
         JTextField ofertaField = new JTextField();
-        ofertaField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        ofertaField.setBounds(20, 435, 300, 35);
         panel.add(ofertaField);
-        panel.add(Box.createVerticalStrut(10));
 
         JButton bidBtn = new JButton("Plaseaza Oferta");
-        bidBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+        bidBtn.setBounds(350, 435, 150, 35);
         bidBtn.addActionListener(e -> {
             try {
                 double amount = Double.parseDouble(ofertaField.getText());
@@ -83,6 +94,6 @@ public class AuctionDetailsWindow extends JFrame {
         });
         panel.add(bidBtn);
 
-        add(new JScrollPane(panel));
+        add(panel);
     }
 }

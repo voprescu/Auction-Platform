@@ -4,7 +4,6 @@ import service.AuctionService;
 import model.User;
 
 import javax.swing.*;
-import java.awt.*;
 import java.time.LocalDateTime;
 
 public class CreateAuctionWindow extends JFrame {
@@ -21,40 +20,45 @@ public class CreateAuctionWindow extends JFrame {
         setResizable(false);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        panel.setLayout(null);
 
-        // Title
-        panel.add(new JLabel("Titlu:"));
+        JLabel titleLbl = new JLabel("Titlu:");
+        titleLbl.setBounds(50, 30, 100, 20);
+        panel.add(titleLbl);
+
         JTextField titleField = new JTextField();
-        titleField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        titleField.setBounds(50, 50, 400, 30);
         panel.add(titleField);
-        panel.add(Box.createVerticalStrut(10));
 
-        // Description
-        panel.add(new JLabel("Descriere:"));
-        JTextArea descField = new JTextArea(5, 30);
+        JLabel descLbl = new JLabel("Descriere:");
+        descLbl.setBounds(50, 90, 100, 20);
+        panel.add(descLbl);
+
+        JTextArea descField = new JTextArea();
         descField.setLineWrap(true);
+        descField.setWrapStyleWord(true);
         JScrollPane descScroll = new JScrollPane(descField);
+        descScroll.setBounds(50, 110, 400, 100);
         panel.add(descScroll);
-        panel.add(Box.createVerticalStrut(10));
 
-        // Starting Price
-        panel.add(new JLabel("Preț de start:"));
+        JLabel priceLbl = new JLabel("Preț de start:");
+        priceLbl.setBounds(50, 220, 100, 20);
+        panel.add(priceLbl);
+
         JTextField priceField = new JTextField();
-        priceField.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
+        priceField.setBounds(50, 240, 400, 30);
         panel.add(priceField);
-        panel.add(Box.createVerticalStrut(10));
 
-        // Days
-        panel.add(new JLabel("Durată (zile):"));
+        JLabel daysLbl = new JLabel("Durată (zile):");
+        daysLbl.setBounds(50, 280, 100, 20);
+        panel.add(daysLbl);
+
         JSpinner daysSpinner = new JSpinner(new SpinnerNumberModel(7, 1, 365, 1));
+        daysSpinner.setBounds(50, 300, 100, 30);
         panel.add(daysSpinner);
-        panel.add(Box.createVerticalStrut(20));
 
-        // Butoane
-        JPanel buttonPanel = new JPanel();
         JButton createBtn = new JButton("Creează");
+        createBtn.setBounds(150, 360, 100, 40);
         createBtn.addActionListener(e -> {
             try {
                 String title = titleField.getText();
@@ -74,17 +78,15 @@ public class CreateAuctionWindow extends JFrame {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         });
+        panel.add(createBtn);
 
         JButton backBtn = new JButton("Înapoi");
+        backBtn.setBounds(270, 360, 100, 40);
         backBtn.addActionListener(e -> {
             new MainWindow(currentUser).setVisible(true);
             this.dispose();
         });
-
-        buttonPanel.add(createBtn);
-        buttonPanel.add(Box.createHorizontalStrut(10));
-        buttonPanel.add(backBtn);
-        panel.add(buttonPanel);
+        panel.add(backBtn);
 
         add(panel);
     }

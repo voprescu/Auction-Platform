@@ -15,36 +15,29 @@ public class LoginWindow extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
 
-        // Panel principal
         JPanel panel = new JPanel();
         panel.setLayout(null); // layout manual
 
-        // Title
         JLabel titleLabel = new JLabel("Login");
         titleLabel.setBounds(150, 20, 100, 30);
         panel.add(titleLabel);
 
-        // Username label
         JLabel userLabel = new JLabel("Username:");
         userLabel.setBounds(50, 70, 100, 20);
         panel.add(userLabel);
 
-        // Username field
         JTextField usernameField = new JTextField();
         usernameField.setBounds(50, 90, 300, 30);
         panel.add(usernameField);
 
-        // Password label
         JLabel passLabel = new JLabel("Parola:");
         passLabel.setBounds(50, 130, 100, 20);
         panel.add(passLabel);
 
-        // Password field
         JPasswordField passwordField = new JPasswordField();
         passwordField.setBounds(50, 150, 300, 30);
         panel.add(passwordField);
 
-        // Login button
         JButton loginBtn = new JButton("Login");
         loginBtn.setBounds(50, 200, 140, 40);
         loginBtn.addActionListener(e -> {
@@ -61,7 +54,6 @@ public class LoginWindow extends JFrame {
         });
         panel.add(loginBtn);
 
-        // Register button
         JButton registerBtn = new JButton("Înregistrare");
         registerBtn.setBounds(210, 200, 140, 40);
         registerBtn.addActionListener(e -> {

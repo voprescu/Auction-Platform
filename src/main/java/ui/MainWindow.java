@@ -22,7 +22,6 @@ public class MainWindow extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        // Butoane top
         JButton createAuctionBtn = new JButton("Creează Licitație");
         createAuctionBtn.setBounds(20, 20, 150, 40);
         createAuctionBtn.addActionListener(e -> {
@@ -39,7 +38,6 @@ public class MainWindow extends JFrame {
         });
         panel.add(logoutBtn);
 
-        // Lista licitații
         DefaultListModel<String> listModel = new DefaultListModel<>();
         JList<String> auctionList = new JList<>(listModel);
 
@@ -56,7 +54,6 @@ public class MainWindow extends JFrame {
         scrollPane.setBounds(20, 70, 760, 450);
         panel.add(scrollPane);
 
-        // Button detalii
         JButton viewDetailsBtn = new JButton("Vezi Detalii");
         viewDetailsBtn.setBounds(320, 530, 150, 40);
         viewDetailsBtn.addActionListener(e -> {
