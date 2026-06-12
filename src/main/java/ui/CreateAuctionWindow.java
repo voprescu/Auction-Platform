@@ -13,7 +13,7 @@ public class CreateAuctionWindow extends JFrame {
     public CreateAuctionWindow(User user) {
         this.currentUser = user;
 
-        setTitle("Creează Licitație");
+        setTitle("Creează Licitatie");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 450);
         setLocationRelativeTo(null);
@@ -41,7 +41,7 @@ public class CreateAuctionWindow extends JFrame {
         descScroll.setBounds(50, 110, 400, 100);
         panel.add(descScroll);
 
-        JLabel priceLbl = new JLabel("Preț de start:");
+        JLabel priceLbl = new JLabel("Pret de start:");
         priceLbl.setBounds(50, 220, 100, 20);
         panel.add(priceLbl);
 
@@ -49,7 +49,7 @@ public class CreateAuctionWindow extends JFrame {
         priceField.setBounds(50, 240, 400, 30);
         panel.add(priceField);
 
-        JLabel daysLbl = new JLabel("Durată (zile):");
+        JLabel daysLbl = new JLabel("Durata (zile):");
         daysLbl.setBounds(50, 280, 100, 20);
         panel.add(daysLbl);
 
@@ -57,7 +57,7 @@ public class CreateAuctionWindow extends JFrame {
         daysSpinner.setBounds(50, 300, 100, 30);
         panel.add(daysSpinner);
 
-        JButton createBtn = new JButton("Creează");
+        JButton createBtn = new JButton("Creeaza");
         createBtn.setBounds(150, 360, 100, 40);
         createBtn.addActionListener(e -> {
             try {
@@ -69,18 +69,18 @@ public class CreateAuctionWindow extends JFrame {
                 LocalDateTime endTime = LocalDateTime.now().plusDays(days);
                 auctionService.createAuction(title, description, price, endTime, currentUser.getId());
 
-                JOptionPane.showMessageDialog(this, "Licitație creată cu succes!");
+                JOptionPane.showMessageDialog(this, "Licitatie creată cu succes!");
                 new MainWindow(currentUser).setVisible(true);
                 this.dispose();
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Preț invalid!");
+                JOptionPane.showMessageDialog(this, "Pret invalid!");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         });
         panel.add(createBtn);
 
-        JButton backBtn = new JButton("Înapoi");
+        JButton backBtn = new JButton("Inapoi");
         backBtn.setBounds(270, 360, 100, 40);
         backBtn.addActionListener(e -> {
             new MainWindow(currentUser).setVisible(true);

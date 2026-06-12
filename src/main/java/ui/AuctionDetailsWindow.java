@@ -18,7 +18,7 @@ public class AuctionDetailsWindow extends JFrame {
         this.auction = auction;
         this.currentUser = user;
 
-        setTitle("Detalii Licitație: " + auction.getTitle());
+        setTitle("Detalii Licitatie: " + auction.getTitle());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(800, 700);
         setLocationRelativeTo(null);
@@ -34,7 +34,7 @@ public class AuctionDetailsWindow extends JFrame {
         descLabel.setBounds(20, 50, 660, 25);
         panel.add(descLabel);
 
-        JLabel currentPriceLabel = new JLabel("Preț curent: " + auction.getCurrentPrice() + " lei");
+        JLabel currentPriceLabel = new JLabel("Pret curent: " + auction.getCurrentPrice() + " lei");
         currentPriceLabel.setBounds(20, 80, 660, 25);
         panel.add(currentPriceLabel);
 
@@ -60,7 +60,7 @@ public class AuctionDetailsWindow extends JFrame {
         try {
             List<Bid> bids = auctionService.getAuctionBids(auction.getId());
             if (bids.isEmpty()) {
-                bidsModel.addElement("Nu sunt oferte încă");
+                bidsModel.addElement("Nu sunt oferte incă");
             } else {
                 for (Bid bid : bids) {
                     bidsModel.addElement("User " + bid.getUserId() + ": " + bid.getAmount() + " lei");
@@ -84,10 +84,10 @@ public class AuctionDetailsWindow extends JFrame {
             try {
                 double amount = Double.parseDouble(ofertaField.getText());
                 auctionService.placeBid(auction.getId(), currentUser.getId(), amount);
-                JOptionPane.showMessageDialog(this, "Oferta plasată cu succes!");
+                JOptionPane.showMessageDialog(this, "Oferta plasata cu succes!");
                 this.dispose();
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Preț invalid!");
+                JOptionPane.showMessageDialog(this, "Pret invalid!");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }

@@ -14,7 +14,7 @@ public class MainWindow extends JFrame {
     public MainWindow(User user) {
         this.currentUser = user;
 
-        setTitle("Platforma Licitații - Bun venit, " + user.getUsername());
+        setTitle("Platforma Licitatii - Bun venit, " + user.getUsername());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -22,7 +22,7 @@ public class MainWindow extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        JButton createAuctionBtn = new JButton("Creează Licitație");
+        JButton createAuctionBtn = new JButton("Creeaza Licitatie");
         createAuctionBtn.setBounds(20, 20, 150, 40);
         createAuctionBtn.addActionListener(e -> {
             new CreateAuctionWindow(currentUser).setVisible(true);
@@ -66,7 +66,7 @@ public class MainWindow extends JFrame {
                     JOptionPane.showMessageDialog(this, "Eroare: " + ex.getMessage());
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Selectează o licitație!");
+                JOptionPane.showMessageDialog(this, "Selecteaza o licitatie!");
             }
         });
         panel.add(viewDetailsBtn);

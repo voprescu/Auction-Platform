@@ -9,7 +9,7 @@ public class RegisterWindow extends JFrame {
     private UserService userService = new UserService();
 
     public RegisterWindow() {
-        setTitle("Platforma Licitații - Înregistrare");
+        setTitle("Platforma Licitatii - Inregistrare");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 400);
         setLocationRelativeTo(null);
@@ -19,7 +19,7 @@ public class RegisterWindow extends JFrame {
         panel.setLayout(null);
 
         // Title
-        JLabel titleLabel = new JLabel("Înregistrare");
+        JLabel titleLabel = new JLabel("Inregistrare");
         titleLabel.setBounds(130, 20, 150, 30);
         panel.add(titleLabel);
 
@@ -43,7 +43,7 @@ public class RegisterWindow extends JFrame {
         panel.add(passwordField);
 
         // Register button
-        JButton registerBtn = new JButton("Înregistrare");
+        JButton registerBtn = new JButton("Inregistrare");
         registerBtn.setBounds(50, 270, 140, 40);
         registerBtn.addActionListener(e -> {
             String username = usernameField.getText();
@@ -51,7 +51,7 @@ public class RegisterWindow extends JFrame {
 
             try {
                 User user = userService.register(username, password);
-                JOptionPane.showMessageDialog(this, "Înregistrare reușită! Bun venit, " + user.getUsername());
+                JOptionPane.showMessageDialog(this, "Inregistrare reusita! Bun venit, " + user.getUsername());
                 new LoginWindow().setVisible(true);
                 this.dispose();
             } catch (Exception ex) {
@@ -60,7 +60,7 @@ public class RegisterWindow extends JFrame {
         });
         panel.add(registerBtn);
 
-        JButton backBtn = new JButton("Înapoi");
+        JButton backBtn = new JButton("Inapoi");
         backBtn.setBounds(210, 270, 140, 40);
         backBtn.addActionListener(e -> {
             new LoginWindow().setVisible(true);

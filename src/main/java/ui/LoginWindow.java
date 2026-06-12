@@ -9,7 +9,7 @@ public class LoginWindow extends JFrame {
     private UserService userService = new UserService();
 
     public LoginWindow() {
-        setTitle("Platforma Licitații - Login");
+        setTitle("Platforma Licitatii - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);
@@ -54,7 +54,7 @@ public class LoginWindow extends JFrame {
         });
         panel.add(loginBtn);
 
-        JButton registerBtn = new JButton("Înregistrare");
+        JButton registerBtn = new JButton("Inregistrare");
         registerBtn.setBounds(210, 200, 140, 40);
         registerBtn.addActionListener(e -> {
             new RegisterWindow().setVisible(true);
