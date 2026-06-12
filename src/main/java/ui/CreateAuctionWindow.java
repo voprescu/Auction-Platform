@@ -13,7 +13,7 @@ public class CreateAuctionWindow extends JFrame {
     public CreateAuctionWindow(User user) {
         this.currentUser = user;
 
-        setTitle("Creează Licitatie");
+        setTitle("Create an auction");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500, 450);
         setLocationRelativeTo(null);
@@ -22,7 +22,7 @@ public class CreateAuctionWindow extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        JLabel titleLbl = new JLabel("Titlu:");
+        JLabel titleLbl = new JLabel("Title:");
         titleLbl.setBounds(50, 30, 100, 20);
         panel.add(titleLbl);
 
@@ -30,7 +30,7 @@ public class CreateAuctionWindow extends JFrame {
         titleField.setBounds(50, 50, 400, 30);
         panel.add(titleField);
 
-        JLabel descLbl = new JLabel("Descriere:");
+        JLabel descLbl = new JLabel("Description:");
         descLbl.setBounds(50, 90, 100, 20);
         panel.add(descLbl);
 
@@ -41,7 +41,7 @@ public class CreateAuctionWindow extends JFrame {
         descScroll.setBounds(50, 110, 400, 100);
         panel.add(descScroll);
 
-        JLabel priceLbl = new JLabel("Pret de start:");
+        JLabel priceLbl = new JLabel("Starting price:");
         priceLbl.setBounds(50, 220, 100, 20);
         panel.add(priceLbl);
 
@@ -49,7 +49,7 @@ public class CreateAuctionWindow extends JFrame {
         priceField.setBounds(50, 240, 400, 30);
         panel.add(priceField);
 
-        JLabel daysLbl = new JLabel("Durata (zile):");
+        JLabel daysLbl = new JLabel("End time (zile):");
         daysLbl.setBounds(50, 280, 100, 20);
         panel.add(daysLbl);
 
@@ -57,7 +57,7 @@ public class CreateAuctionWindow extends JFrame {
         daysSpinner.setBounds(50, 300, 100, 30);
         panel.add(daysSpinner);
 
-        JButton createBtn = new JButton("Creeaza");
+        JButton createBtn = new JButton("Create");
         createBtn.setBounds(150, 360, 100, 40);
         createBtn.addActionListener(e -> {
             try {
@@ -69,18 +69,18 @@ public class CreateAuctionWindow extends JFrame {
                 LocalDateTime endTime = LocalDateTime.now().plusDays(days);
                 auctionService.createAuction(title, description, price, endTime, currentUser.getId());
 
-                JOptionPane.showMessageDialog(this, "Licitatie creată cu succes!");
+                JOptionPane.showMessageDialog(this, "Auction created successfully!");
                 new MainWindow(currentUser).setVisible(true);
                 this.dispose();
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Pret invalid!");
+                JOptionPane.showMessageDialog(this, "Invalid price!");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         });
         panel.add(createBtn);
 
-        JButton backBtn = new JButton("Inapoi");
+        JButton backBtn = new JButton("Back");
         backBtn.setBounds(270, 360, 100, 40);
         backBtn.addActionListener(e -> {
             new MainWindow(currentUser).setVisible(true);

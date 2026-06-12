@@ -9,7 +9,7 @@ public class LoginWindow extends JFrame {
     private UserService userService = new UserService();
 
     public LoginWindow() {
-        setTitle("Platforma Licitatii - Login");
+        setTitle("Auction Platform - Login");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
         setLocationRelativeTo(null);
@@ -30,7 +30,7 @@ public class LoginWindow extends JFrame {
         usernameField.setBounds(50, 90, 300, 30);
         panel.add(usernameField);
 
-        JLabel passLabel = new JLabel("Parola:");
+        JLabel passLabel = new JLabel("Password:");
         passLabel.setBounds(50, 130, 100, 20);
         panel.add(passLabel);
 
@@ -49,12 +49,12 @@ public class LoginWindow extends JFrame {
                 new MainWindow(user).setVisible(true);
                 this.dispose();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Eroare", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
         panel.add(loginBtn);
 
-        JButton registerBtn = new JButton("Inregistrare");
+        JButton registerBtn = new JButton("Register");
         registerBtn.setBounds(210, 200, 140, 40);
         registerBtn.addActionListener(e -> {
             new RegisterWindow().setVisible(true);

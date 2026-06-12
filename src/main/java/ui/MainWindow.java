@@ -14,7 +14,7 @@ public class MainWindow extends JFrame {
     public MainWindow(User user) {
         this.currentUser = user;
 
-        setTitle("Platforma Licitatii - Bun venit, " + user.getUsername());
+        setTitle("Auction Platform - Welcome, " + user.getUsername());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -22,7 +22,7 @@ public class MainWindow extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        JButton createAuctionBtn = new JButton("Creeaza Licitatie");
+        JButton createAuctionBtn = new JButton("Create an auction");
         createAuctionBtn.setBounds(20, 20, 150, 40);
         createAuctionBtn.addActionListener(e -> {
             new CreateAuctionWindow(currentUser).setVisible(true);
@@ -47,14 +47,14 @@ public class MainWindow extends JFrame {
                 listModel.addElement(auction.getTitle() + " - " + auction.getCurrentPrice() + " lei");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Eroare: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
 
         JScrollPane scrollPane = new JScrollPane(auctionList);
         scrollPane.setBounds(20, 70, 760, 450);
         panel.add(scrollPane);
 
-        JButton viewDetailsBtn = new JButton("Vezi Detalii");
+        JButton viewDetailsBtn = new JButton("View details");
         viewDetailsBtn.setBounds(320, 530, 150, 40);
         viewDetailsBtn.addActionListener(e -> {
             int index = auctionList.getSelectedIndex();
@@ -63,10 +63,10 @@ public class MainWindow extends JFrame {
                     List<Auction> auctions = auctionService.getAllActiveAuctions();
                     new AuctionDetailsWindow(auctions.get(index), currentUser).setVisible(true);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(this, "Eroare: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Selecteaza o licitatie!");
+                JOptionPane.showMessageDialog(this, "Select an auction!");
             }
         });
         panel.add(viewDetailsBtn);

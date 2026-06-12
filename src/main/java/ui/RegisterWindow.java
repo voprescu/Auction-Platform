@@ -9,7 +9,7 @@ public class RegisterWindow extends JFrame {
     private UserService userService = new UserService();
 
     public RegisterWindow() {
-        setTitle("Platforma Licitatii - Inregistrare");
+        setTitle("Auction Platform - Register");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 400);
         setLocationRelativeTo(null);
@@ -18,12 +18,10 @@ public class RegisterWindow extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        // Title
-        JLabel titleLabel = new JLabel("Inregistrare");
+        JLabel titleLabel = new JLabel("Register");
         titleLabel.setBounds(130, 20, 150, 30);
         panel.add(titleLabel);
 
-        // Username
         JLabel userLabel = new JLabel("Username:");
         userLabel.setBounds(50, 70, 100, 20);
         panel.add(userLabel);
@@ -32,9 +30,7 @@ public class RegisterWindow extends JFrame {
         usernameField.setBounds(50, 90, 300, 30);
         panel.add(usernameField);
 
-
-        // Password
-        JLabel passLabel = new JLabel("Parola:");
+        JLabel passLabel = new JLabel("Password:");
         passLabel.setBounds(50, 190, 100, 20);
         panel.add(passLabel);
 
@@ -42,8 +38,7 @@ public class RegisterWindow extends JFrame {
         passwordField.setBounds(50, 210, 300, 30);
         panel.add(passwordField);
 
-        // Register button
-        JButton registerBtn = new JButton("Inregistrare");
+        JButton registerBtn = new JButton("Register");
         registerBtn.setBounds(50, 270, 140, 40);
         registerBtn.addActionListener(e -> {
             String username = usernameField.getText();
@@ -51,16 +46,16 @@ public class RegisterWindow extends JFrame {
 
             try {
                 User user = userService.register(username, password);
-                JOptionPane.showMessageDialog(this, "Inregistrare reusita! Bun venit, " + user.getUsername());
+                JOptionPane.showMessageDialog(this, "Registration successful! Welcome, " + user.getUsername());
                 new LoginWindow().setVisible(true);
                 this.dispose();
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Eroare", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         });
         panel.add(registerBtn);
 
-        JButton backBtn = new JButton("Inapoi");
+        JButton backBtn = new JButton("Back");
         backBtn.setBounds(210, 270, 140, 40);
         backBtn.addActionListener(e -> {
             new LoginWindow().setVisible(true);

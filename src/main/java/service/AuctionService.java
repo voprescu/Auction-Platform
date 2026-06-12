@@ -16,15 +16,15 @@ public class AuctionService {
                               LocalDateTime endTime, int sellerId) throws Exception {
         // Validari
         if (title.isEmpty()) {
-            throw new Exception("Titlul licitatiei este obligatoriu!");
+            throw new Exception("Auction title is mandatory!");
         }
 
         if (startingPrice <= 0) {
-            throw new Exception("Pretul trebuie sa fie pozitiv!");
+            throw new Exception("Price needs to be a positive number!");
         }
 
         if (endTime.isBefore(LocalDateTime.now())) {
-            throw new Exception("Data de expirare trebuie sa fie in viitor!");
+            throw new Exception("Expiration date needs to be in the future!");
         }
 
         Auction auction = new Auction(title, description, startingPrice, endTime, sellerId);
@@ -35,19 +35,19 @@ public class AuctionService {
         Auction auction = auctionDAO.findById(auctionId);
 
         if (auction == null) {
-            throw new Exception("Licitatia nu exista!");
+            throw new Exception("The auction doesn't exist!");
         }
 
         if (auction.getStatus().equals("CLOSED")) {
-            throw new Exception("Licitatia s-a inchis!");
+            throw new Exception("The auction is closed!");
         }
 
         if (LocalDateTime.now().isAfter(auction.getEndTime())) {
-            throw new Exception("Licitatia a expirat!");
+            throw new Exception("The auction is closed!");
         }
 
         if (amount <= auction.getCurrentPrice()) {
-            throw new Exception("Oferta trebuie sa fie mai mare decat " + auction.getCurrentPrice());
+            throw new Exception("Offer must be bigger than " + auction.getCurrentPrice());
         }
 
         bidDAO.saveBid(auctionId, userId, amount);
@@ -61,7 +61,7 @@ public class AuctionService {
     public Auction getAuctionDetails(int auctionId) throws Exception {
         Auction auction = auctionDAO.findById(auctionId);
         if (auction == null) {
-            throw new Exception("Licitatia nu exista!");
+            throw new Exception("The auction doesn't exist!");
         }
         return auction;
     }

@@ -18,7 +18,7 @@ public class AuctionDetailsWindow extends JFrame {
         this.auction = auction;
         this.currentUser = user;
 
-        setTitle("Detalii Licitatie: " + auction.getTitle());
+        setTitle("Auction details: " + auction.getTitle());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(800, 700);
         setLocationRelativeTo(null);
@@ -26,28 +26,28 @@ public class AuctionDetailsWindow extends JFrame {
         JPanel panel = new JPanel();
         panel.setLayout(null);
 
-        JLabel titleLabel = new JLabel("Titlu: " + auction.getTitle());
+        JLabel titleLabel = new JLabel("Title: " + auction.getTitle());
         titleLabel.setBounds(20, 20, 660, 25);
         panel.add(titleLabel);
 
-        JLabel descLabel = new JLabel("Descriere: " + auction.getDescription());
+        JLabel descLabel = new JLabel("Description: " + auction.getDescription());
         descLabel.setBounds(20, 50, 660, 25);
         panel.add(descLabel);
 
-        JLabel currentPriceLabel = new JLabel("Pret curent: " + auction.getCurrentPrice() + " lei");
+        JLabel currentPriceLabel = new JLabel("Current price: " + auction.getCurrentPrice() + " lei");
         currentPriceLabel.setBounds(20, 80, 660, 25);
         panel.add(currentPriceLabel);
 
-        JLabel startPriceLabel = new JLabel("Preț de start: " + auction.getStartingPrice() + " lei");
+        JLabel startPriceLabel = new JLabel("Starting price:: " + auction.getStartingPrice() + " lei");
         startPriceLabel.setBounds(20, 110, 660, 25);
         panel.add(startPriceLabel);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        JLabel endTimeLabel = new JLabel("Expirare: " + auction.getEndTime().format(formatter));
+        JLabel endTimeLabel = new JLabel("Auction ends: " + auction.getEndTime().format(formatter));
         endTimeLabel.setBounds(20, 140, 660, 25);
         panel.add(endTimeLabel);
 
-        JLabel bidsLabel = new JLabel("Oferte:");
+        JLabel bidsLabel = new JLabel("Offers:");
         bidsLabel.setBounds(20, 170, 660, 25);
         panel.add(bidsLabel);
 
@@ -60,17 +60,17 @@ public class AuctionDetailsWindow extends JFrame {
         try {
             List<Bid> bids = auctionService.getAuctionBids(auction.getId());
             if (bids.isEmpty()) {
-                bidsModel.addElement("Nu sunt oferte incă");
+                bidsModel.addElement("There are no offers currently");
             } else {
                 for (Bid bid : bids) {
                     bidsModel.addElement("User " + bid.getUserId() + ": " + bid.getAmount() + " lei");
                 }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Eroare: " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage());
         }
 
-        JLabel ofertaLabel = new JLabel("Plaseaza oferta (lei):");
+        JLabel ofertaLabel = new JLabel("Place an offer (lei):");
         ofertaLabel.setBounds(20, 410, 200, 25);
         panel.add(ofertaLabel);
 
@@ -78,16 +78,16 @@ public class AuctionDetailsWindow extends JFrame {
         ofertaField.setBounds(20, 435, 300, 35);
         panel.add(ofertaField);
 
-        JButton bidBtn = new JButton("Plaseaza Oferta");
+        JButton bidBtn = new JButton("Place the offer");
         bidBtn.setBounds(350, 435, 150, 35);
         bidBtn.addActionListener(e -> {
             try {
                 double amount = Double.parseDouble(ofertaField.getText());
                 auctionService.placeBid(auction.getId(), currentUser.getId(), amount);
-                JOptionPane.showMessageDialog(this, "Oferta plasata cu succes!");
+                JOptionPane.showMessageDialog(this, "Offer placed successfully!");
                 this.dispose();
             } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Pret invalid!");
+                JOptionPane.showMessageDialog(this, "Invalid price!");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
