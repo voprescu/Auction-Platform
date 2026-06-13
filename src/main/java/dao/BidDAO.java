@@ -48,7 +48,6 @@ public class BidDAO {
         return bids;
     }
 
-    // Gaseste oferta cu cel mai mare pret pentru o licitatie
     public Bid getHighestBid(int auctionId) throws SQLException {
         String sql = "SELECT * FROM bids WHERE auction_id = ? ORDER BY amount DESC LIMIT 1";
 

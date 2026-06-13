@@ -2,6 +2,7 @@ package dao;
 
 import model.User;
 import util.DatabaseConnection;
+import util.PasswordUtil;
 
 import java.sql.*;
 
@@ -19,29 +20,32 @@ public class UserDAO {
         }
     }
 
-    public User login(String username, String password) throws SQLException {           //Login
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+    public User login(String username, String password) throws SQLException {
+        String sql = "SELECT * FROM users WHERE username = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, username);
-            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                return new User(
-                        rs.getInt("id"),
-                        rs.getString("username"),
-                        rs.getString("password")
-                );
+                String hashedPassword = rs.getString("password");
+
+                if (PasswordUtil.verify(password, hashedPassword)) {
+                    return new User(
+                            rs.getInt("id"),
+                            rs.getString("username"),
+                            rs.getString("password")
+                    );
+                }
             }
         }
         return null;
     }
 
 
-    public boolean usernameExists(String username) throws SQLException {        //Verificare existenta user
+    public boolean usernameExists(String username) throws SQLException {
         String sql = "SELECT id FROM users WHERE username = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
@@ -49,11 +53,11 @@ public class UserDAO {
 
             ps.setString(1, username);
             ResultSet rs = ps.executeQuery();
-            return rs.next(); // true daca a gasit ceva
+            return rs.next(); // true if something is found
         }
     }
 
-    // Inregistreaza si returneaza userul cu id-ul generat
+    // Registers and returns the generated user id
     public User registerAndReturn(User user) throws SQLException {
         String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
 
@@ -61,10 +65,9 @@ public class UserDAO {
              PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, user.getUsername());
-            ps.setString(2, user.getPassword());
+            ps.setString(2, PasswordUtil.hash(user.getPassword()));
             ps.executeUpdate();
 
-            // Preia id-ul generat de MySQL
             ResultSet generatedKeys = ps.getGeneratedKeys();
             if (generatedKeys.next()) {
                 int userId = generatedKeys.getInt(1);
