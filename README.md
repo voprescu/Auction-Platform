@@ -32,6 +32,7 @@ src/main/java/
 - Place bids with automatic validation
 - Bid history for each auction
 - Modern UI
+- Password hashing
 
 ## Installing
 
