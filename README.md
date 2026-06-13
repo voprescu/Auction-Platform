@@ -8,13 +8,22 @@ Users can register, create auctions, and place bids in real time.
 <img width="300" height="250" alt="app2" src="https://github.com/user-attachments/assets/de862a94-f3a2-4c45-a866-07a1337c2103" />
 <img width="300" height="250" alt="app3" src="https://github.com/user-attachments/assets/98019029-1a8b-43c0-b60d-47256accfb7c" />
 
-
+## Project Structure
+```
+src/main/java/
+|- model/      - Data classes (User, Auction, Bid)
+|- dao/        - Database access layer
+|- service/    - Business logic
+|- ui/         - Swing windows
+|- util/       - Database connection & utilities
+```
 
 ## Tech Stack
 - Java 23
 - MySQL
-- Swing (UI)
+- Swing + Flatlaf (UI)
 - Maven
+- BCrypt (password hashing)
 
 ## Features
 - User registration and authentication
@@ -29,8 +38,6 @@ Users can register, create auctions, and place bids in real time.
 ### Requirements
 - Java 23
 - MySQL Server
-
-### Steps
 
 ### Steps
 1. Clone the repository
@@ -53,5 +60,6 @@ Users can register, create auctions, and place bids in real time.
 ```
 
 5. Run `Main.java`
+
    
 
